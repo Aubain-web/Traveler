@@ -1,0 +1,20 @@
+/* search-result.css */
+
+.search-result {
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+
+.flight-info {
+    margin-bottom: 10px;
+}
+
+.flight-info p {
+    margin: 5px 0;
+}
+
+.error-message {
+    color: red;
+}

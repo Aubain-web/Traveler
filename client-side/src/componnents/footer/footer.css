@@ -1,0 +1,63 @@
+.footer {
+    background-color: rgba(85, 30, 23, 0.808);
+    display: flex;
+    width: 100%;
+    position: absolute; /* Positionnement absolu */
+    top: 100%; /* Placer la partie supérieure de la footer juste en dessous de l'élément précédent */
+}
+
+.media {
+    display: flex;
+    align-items: center;
+    justify-items: auto;
+    gap: 10%;
+}
+
+.txtInsta {
+    color: black;
+    display: none;
+}
+
+.txtFacebook {
+    color: black;
+    display: none;
+}
+
+.txtX {
+    color: black;
+    display: none;
+}
+
+.txtYoutube {
+    color: black;
+    display: none;
+}
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.insta:hover .txtInsta {
+    display: block;
+    position: absolute;
+    top: 0;
+
+}
+
+.facebook:hover .txtFacebook {
+    display: block;
+    position: absolute;
+    top: 0;
+}
+
+.x:hover .txtX {
+    display: block;
+    position: absolute;
+    top: 0;
+}
+
+.youtube:hover .txtYoutube {
+    display: block;
+    position: absolute;
+    top: 0;
+}

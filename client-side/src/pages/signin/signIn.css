@@ -1,0 +1,17 @@
+.signIn {
+  justify-content: center;
+  background-color: aqua;
+  align-items: center;
+  display: flex;
+  height: 120vh;
+}
+
+.formulaire {
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  width: 300px;
+  margin: auto;
+}
