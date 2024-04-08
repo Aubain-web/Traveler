@@ -1,4 +1,4 @@
-import "./Home.css";
+//import "./Home.css";
 import HeaderCp from "../../componnents/header/headerCp";
 import BodySearch from "../../componnents/bodySearch/bodySearch";
 import FooterCp from "../../componnents/footer/footerCp";

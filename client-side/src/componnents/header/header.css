@@ -1,36 +1,55 @@
+
 .contenthead{
+    position : fixed;
     display: flex;
     background-color: black;
-    position: absolute;
+    /*position: absolute;*/
     top: 0;
     right: 0;
     left: 0;
+    z-index: 999;
 }
 .logo {
     padding-left: 45%;
     display : flex;
     gap : 10px;
+    z-index: 1;
+    position : relative;
+
 }
 .dropdown {
-  position: relative;
-  display: inline-block;
+    position: absolute; /* Utilisez une position absolue pour positionner le dropdown */
+    top: 100%; /* Placez le dropdown juste en dessous du logo */
+    left: 0; /* Alignez-le sur la gauche */
+    display: flex;
+    z-index: 999;
 }
 .dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f1f1f1;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  align-items: center;
-  z-index: 1;
+    display: none;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 999;
+    position: absolute; /* Utilisez une position absolue pour que le dropdown soit indépendant du flux de document */
+    top: 100%; /* Placez-le juste en dessous du lien */
+    left: 0; /* Alignez-le sur la gauche */
 }
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
 .dropdown-content a {
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
 }
-.dropdown-content a:hover {background-color: #ddd;}
-.dropdown:hover .dropdown-content {display: block;}
-.dropdown:hover .dropbtn {background-color: #3e8e41;}
-  
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+.user h3{
+    font-family: "Baskerville Old Face", fantasy;
+    color : #ffffff;
+}
