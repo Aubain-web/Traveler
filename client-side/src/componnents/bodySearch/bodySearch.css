@@ -1,15 +1,15 @@
 .body {
-    padding: 20px;
+    padding: 10px;
     background-image: url("../../assets/images/plane_air.jpg");
     background-repeat: no-repeat;
-    background-size: 100% 100%; /* Adjusted to fit the entire page */
-    background-position: center; /* Center the background image */
+    background-size: cover;
+    background-position: center;
     width: 100%;
     position: absolute;
     top: 58px;
-    left : 0;
-    min-height: 100vh; /* Ensure the component covers at least the height of the viewport */
-    background-color: #f0f0f0; /* Backup background color */
+    left: 0;
+    min-height: 100vh;
+    background-color: #f0f0f0;
 }
 
 .search {
@@ -18,24 +18,60 @@
     left: 50%;
     transform: translate(-50%, -50%);
     display: flex;
-    gap: 5px;
+    flex-direction: row;
+    gap: 10px;
     background-color: rgba(255, 255, 255, 0.8);
     opacity: 0.9;
     padding: 20px;
     border-radius: 8px;
 }
 
+.input-container {
+    display: flex;
+    gap: 5px;
+}
+
 .depart,
 .arrive,
-.date-depart {
-    width: 100%;
+.date {
+    flex-grow: 1;
+    height: 32px;
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 4px;
 }
 
+.select-container{
+    display : flex;
+    justify-content: center;
+}
+.select-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.select-wrapper p {
+    margin-right: 5px;
+}
+
+.select-wrapper select {
+    width: 60px;
+    height: 32px;
+    margin-bottom: 12px;
+}
+
 button {
-    width: 100%;
-    padding: 10px;
-    font-size: 18px;
+    /*width: 100%;*/
+    Width: 60px;
+    height: 33px;
+    font-size: 16px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
 }

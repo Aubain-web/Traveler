@@ -1,0 +1,96 @@
+/* Style pour le corps de la page */
+.search-result {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    margin-top:20px;
+}
+
+.search-result-content {
+    max-width: 800px;
+    width: 100%;
+}
+
+/* Style pour le titre "Search result" */
+.search-result-content h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    margin-left: 320px;
+}
+
+/* Style pour les blocs de résultats */
+.flight-block {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.flight-item {
+    /*width: calc(33.33% - 20px);  Ajustez la largeur des éléments selon vos besoins */
+    width : auto;
+    margin-bottom: 20px; /* Espace entre les éléments */
+    border: 1px solid #ccc; /* Bordure pour séparer les éléments */
+    padding: 10px;
+    border-radius: 8px;
+    cursor: pointer; /* Rendre le bloc cliquable*/
+    transition: background-color 0.3s ease; /* Ajouter une transition pour l'effet visuel*/
+}
+
+/* Style pour les détails de vol */
+.flight-details {
+    margin-top: 10px;
+}
+
+/* Style pour le message de chargement */
+.loading-message {
+    font-size: 18px;
+    text-align: center;
+}
+
+/* Style pour les erreurs */
+.error-message {
+    color: red;
+    font-weight: bold;
+}
+
+/* Style pour les liens */
+a {
+    color: blue;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+.flight-block {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+/*.flight-item {
+    flex: 1 0 calc(33.33% - 20px); /* Pour afficher trois éléments par ligne
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    cursor: pointer; /* Rendre le bloc cliquable
+    transition: background-color 0.3s ease; /* Ajouter une transition pour l'effet visuel
+}*/
+
+.flight-item:hover {
+    background-color: #f0f0f0; /* Changer la couleur de fond lorsqu'il est survolé */
+}
+
+
+.modal-box {
+    background-color: #fefefe;
+    margin: 0 auto; /* Pour centrer horizontalement */
+    margin-top: 10%; /* Pour centrer verticalement */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 600px;
+    border-radius: 8px;
+    position: relative;
+}

@@ -5,7 +5,6 @@ const FactureSchema = new mongoose.Schema({
     lastName: { type: String, required: true },
     email: { type: String, required: true, unique: true },
     compagnieAerienne: { type: String, required: true },
-    numeroVol: { type: String, required: true },
     aeroportDepart: { type: String, required: true },
     aeroportArrivee: { type: String, required: true },
     dateDepart: { type: Date, required: true },
@@ -19,7 +18,8 @@ const FactureSchema = new mongoose.Schema({
     taxes: { type: Number, default: 0 },
     fraisSupplementaires: { type: Number, default: 0 },
     instructionsVoyage: { type: String },
-    dateCreation: { type: Date, default: Date.now }
+    dateCreation: { type: Date, default: Date.now },
+    userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }
 });
 
 const FactureBilletAvion = mongoose.model('FactureBilletAvion', FactureSchema);

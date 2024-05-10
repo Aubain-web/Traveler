@@ -9,6 +9,8 @@ import SearchResult from "./componnents/results/results.jsx";
 import UserDashboard from "./pages/Dashboard/userDashoard.jsx";
 import { UserProvider } from "./componnents/context/userContext.jsx";
 import TravelResult from "./pages/Travels/travelResult.jsx";
+import HeaderCp from "./componnents/header/headerCp.jsx";
+import UserInfo from "./componnents/userInfo/userInfo.jsx";
 //import BodySearch from "./componnents/bodySearch/bodySearch.jsx";
 
 //import Last from "./componnents/last";
@@ -23,6 +25,7 @@ function App() {
       <UserProvider>
         <Routes>
           <Route path='/' element={<HomePg/>}></Route>
+          <Route path='/userInfo' element={<UserInfo/>}></Route>
           <Route path='/login' element={<LoginPg/>}></Route>
           <Route path='/signin' element={<SignIn/>}></Route>
           <Route path='/search-result' element={<SearchResult/>}></Route>

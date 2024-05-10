@@ -1,13 +1,16 @@
-// BodySearch.jsx
-import  { useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './bodySearch.css';
 import ville from '../../dictionaire-ville/villeConv.jsx';
+import './bodySearch.css';
+
 
 const BodySearch = () => {
     const [depart, setDepart] = useState('');
     const [arrive, setArrive] = useState('');
-    const [date, setDate] = useState('');
+    const [dateDepart, setDateDepart] = useState('');
+    const [dateArrive, setDateArrive] = useState('');
+    const [adults, setAdults] = useState(2);
+    const [children, setChildren] = useState(0);
     const navigate = useNavigate();
 
     const handleDepartChange = (e) => {
@@ -18,14 +21,18 @@ const BodySearch = () => {
         setArrive(e.target.value);
     };
 
-    const handleDateChange = (e) => {
-        setDate(e.target.value);
+    const handleDateDepartChange = (e) => {
+        setDateDepart(e.target.value);
+    };
+
+    const handleDateArriveChange = (e) => {
+        setDateArrive(e.target.value);
     };
 
     const handleSearch = () => {
         const translatedDepart = ville()[depart] || depart;
         const translatedArrive = ville()[arrive] || arrive;
-        navigate(`/search-result?depart=${translatedDepart}&arrive=${translatedArrive}&date=${date}`);
+        navigate(`/travel-result?depart=${translatedDepart}&arrive=${translatedArrive}&dateDepart=${dateDepart}&dateArrive=${dateArrive}&adults=${adults}&children=${children}`);
     };
 
     return (
@@ -48,9 +55,33 @@ const BodySearch = () => {
                 <input
                     type="date"
                     className="date"
-                    value={date}
-                    onChange={handleDateChange}
+                    value={dateDepart}
+                    onChange={handleDateDepartChange}
                 />
+                <input
+                    type="date"
+                    className="date"
+                    value={dateArrive}
+                    onChange={handleDateArriveChange}
+                />
+                <div className="select-container">
+                    <div className="select-wrapper">
+                        <p>Adults</p>
+                        <select value={adults} onChange={(e) => setAdults(parseInt(e.target.value))}>
+                            {[...Array(10)].map((_, i) => (
+                                <option key={i + 1} value={i + 1}>{i + 1}</option>
+                            ))}
+                        </select>
+                    </div>
+                    <div className="select-wrapper">
+                        <p>Children</p>
+                        <select value={children} onChange={(e) => setChildren(parseInt(e.target.value))}>
+                            {[...Array(10)].map((_, i) => (
+                                <option key={i} value={i}>{i}</option>
+                            ))}
+                        </select>
+                    </div>
+                </div>
                 <div className="search-btn">
                     <button onClick={handleSearch}>Search</button>
                 </div>

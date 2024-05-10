@@ -1,12 +1,13 @@
 const express = require('express');
 const User = require("../models/Users");
-const auth = require('../middleware/auth');
 const router = express.Router();
 const userCtrl = require('../controllers/users')
+
 
 router.post('/signIn', userCtrl.signIn);
 router.post('/login', userCtrl.login);
 router.get('/:userId', userCtrl.userFind);
+router.get('/findFactures', userCtrl.findFacture)
 
 /*router.post('/loginPg', async(req, res) => {
     try {

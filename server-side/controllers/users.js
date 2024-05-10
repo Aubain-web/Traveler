@@ -1,50 +1,61 @@
 const bcrypt = require('bcrypt');
 const User = require('../models/Users');
-const webtoken = require('jsonwebtoken');
+const jwt = require('jsonwebtoken');
+require('dotenv').config();
+const jwtSecret = process.env.JWT_SECRET;
+FactureBilletAvion = require('../models/facture');
 
 exports.signIn = (req, res, next) =>{
+    console.log('Données POST reçues :', req.body);
     bcrypt.hash(req.body.password, 10)
-
-    .then(hash => {
-        const user = new User ({
-            firstName : req.body.firstName,
-            lastName : req.body.lastName,
-            email : req.body.email,
-            password : hash,
-        });
-        user.save()
-        .then(() => res.status(200).json({message : 'User created successfully'}))
-        .catch(error => res.status(400).json({error}));
-    }).catch(error => res.status(500).json({error}));
-
+        .then(hash => {
+            const user = new User ({
+                firstName : req.body.firstName,
+                lastName : req.body.lastName,
+                email : req.body.email,
+                password : hash,
+            });
+            user.save()
+                .then(() => res.status(200).json({ message: 'User created successfully' }))
+                .catch(error => res.status(400).json({ error: error.message })); // Renvoyer l'erreur message plutôt que juste l'erreur
+        })
+        .catch(error => res.status(500).json({ error: error.message })); // Gérer les erreurs internes du serveur
 };
 
-exports.login = (req, res, next) => {
-    User.findOne({email : req.body.email})
 
-    .then(user => {
-        if(user === null){
-            res.status(401).json({message : 'pair identfiant/password incorrecte'});
-        }else{
-            bcrypt.compare(req.body.password, user.password)
-            .then (valide => {
-                if (!valide){
-                    res.status(401).json({message : 'pair identifiant/password incorrecte'})
-                }else{
-                    res.status(200).json({
-                        userId : user._id,
-                        token : webtoken.sign(
-                            {userId : user._id},
-                            'RANDOM_TOKEN_TICKET',
-                            {expiresIn : '30m'}
-                        ),
-                    });
-                }
-            })
+exports.login = async (req, res, next) => {
+    const { email, password } = req.body;
+
+    try {
+        const user = await User.findOne({ email });
+
+        if (!user) {
+            return res.status(401).json({ message: 'Identifiant ou mot de passe incorrect' });
         }
-    })
-    .catch(error => res.status(500).json({error}));
+
+        const isValidPassword = await bcrypt.compare(password, user.password);
+
+        if (!isValidPassword) {
+            return res.status(401).json({ message: 'Identifiant ou mot de passe incorrect' });
+        }
+
+        const token = jwt.sign({ userId: user._id }, jwtSecret, { expiresIn: '1h' });
+
+        // Stockez le token dans un cookie ou dans le stockage local du navigateur
+        // Pour cet exemple, nous allons stocker le token dans un cookie
+        res.cookie('jwt', token, { httpOnly: true });
+
+        // Renvoyez le token et les informations de l'utilisateur dans la réponse
+        res.json({ user, token });
+
+    } catch (error) {
+        console.error('Erreur lors de l\'authentification:', error);
+        res.status(500).json({ message: 'Une erreur est survenue lors de l\'authentification' });
+    }
 };
+
+
+
 
 exports.userFind = async (req, res, next) =>{
     try {
@@ -59,3 +70,11 @@ exports.userFind = async (req, res, next) =>{
     }
 }
 
+exports.findFacture = async (req, res, next) =>{
+    try {
+        const factures = await FactureBilletAvion.find({ userId: req.user._id }).populate('userId');
+        res.status(200).json(factures);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+}

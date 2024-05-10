@@ -1,0 +1,41 @@
+.option{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    column-gap: 10px;
+}
+
+.option button:first-child {
+    margin-right: 10px;
+}
+
+.modal-details {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    font-family: Arial, sans-serif;
+}
+
+.modal-details table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.modal-details th,
+.modal-details td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: left;
+}
+
+.modal-details th {
+    background-color: #f2f2f2;
+}
+
+.modal-details td:first-child {
+    font-weight: bold;
+}
+
+.modal-details tr:last-child td {
+    border-bottom: none;
+}

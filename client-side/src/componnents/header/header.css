@@ -53,3 +53,12 @@
     font-family: "Baskerville Old Face", fantasy;
     color : #ffffff;
 }
+.user {
+    display: flex;
+    align-items: center; /* Alignez le contenu verticalement au centre */
+    margin-left: auto; /* Déplacez le contenu à droite */
+    padding-right: 20px; /* Ajoutez un espace à droite du contenu */
+}
+.user h3 {
+    margin: 0;
+}

@@ -4,12 +4,10 @@ const FactureBillet = require('../models/facture');
 exports.createFacture = async (req, res) => {
     try {
         const nouvelleFacture = new FactureBillet({
-            user: { type: Schema.Types.ObjectId, ref: 'User', required: true },
             firstName: req.body.firstName,
             lastName: req.body.lastName,
             email: req.body.email,
             compagnieAerienne: req.body.compagnieAerienne,
-            numeroVol: req.body.numeroVol,
             aeroportDepart: req.body.aeroportDepart,
             aeroportArrivee: req.body.aeroportArrivee,
             dateDepart: req.body.dateDepart,
@@ -22,7 +20,8 @@ exports.createFacture = async (req, res) => {
             devise: req.body.devise,
             taxes: req.body.taxes,
             fraisSupplementaires: req.body.fraisSupplementaires,
-            instructionsVoyage: req.body.instructionsVoyage
+            instructionsVoyage: req.body.instructionsVoyage,
+            userId: req.user._id
         });
         await nouvelleFacture.save();
         res.status(200).json({ message: 'Facture created successfully' });

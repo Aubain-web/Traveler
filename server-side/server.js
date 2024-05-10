@@ -5,6 +5,7 @@ const bcrypt = require('bcrypt'); // Import bcrypt
 const connectToDatabase = require('./db');
 const useRoutes = require('./routes/usersRoutes');
 const factureRoutes = require('./routes/facturesRoutes');
+const home = require('./routes/homeRoute');
 const app = express();
 const port = 3001;
 
@@ -70,9 +71,10 @@ app.get('/getFlightInfo', async (req, res) => {
    }
 });
 
-
+app.use('/', home);
 app.use('/pages/user', useRoutes);
 app.use('/user/facture', factureRoutes);
+
 app.listen(port, () => {
    console.log(`Server listening on http://localhost:${port}`);
 });
