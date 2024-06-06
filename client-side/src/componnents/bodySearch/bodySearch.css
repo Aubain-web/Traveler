@@ -75,3 +75,74 @@ button {
 button:hover {
     background-color: #0056b3;
 }
+
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    .body {
+        top: 48px;
+    }
+
+    .search {
+        flex-direction: column;
+        gap: 10px;
+        padding: 30px;
+    }
+
+    .input-container {
+        gap: 5px;
+    }
+
+    .depart,
+    .arrive,
+    .date {
+        height: 48px;
+        padding: 12px;
+        font-size: 20px;
+    }
+
+    .select-wrapper select {
+        width: 80px;
+        height: 48px;
+        font-size: 20px;
+    }
+
+    button {
+        height: 48px;
+        font-size: 20px;
+    }
+}
+
+/* CSS pour les téléphones (écrans de petite taille) */
+@media (max-width: 480px) {
+    .body {
+        top: 48px;
+    }
+
+    .search {
+        flex-direction: column;
+        gap: 10px;
+        padding: 10px;
+    }
+
+    .input-container {
+        gap: 2px;
+    }
+
+    .depart,
+    .arrive,
+    .date {
+        height: 28px;
+        padding: 4px;
+    }
+
+    .select-wrapper select {
+        width: 50px;
+        height: 28px;
+    }
+
+    button {
+        height: 28px;
+        font-size: 14px;
+    }
+}
+

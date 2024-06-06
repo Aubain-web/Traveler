@@ -1,4 +1,4 @@
-// FiltreTravel.jsx
+// filtreTravel.jsx
 import React, { useState } from 'react';
 import './filtreTravel.css';
 
@@ -9,27 +9,14 @@ const FiltreTravel = ({ items, setFilteredItems }) => {
     const [maxDuration, setMaxDuration] = useState('');
 
     const handleFilter = () => {
-        if (!items || !Array.isArray(items)) {
-            console.error('Items is not defined or not an array');
-            return;
-        }
-
         const filteredItems = items.filter(item => {
             const price = parseFloat(item.price);
             const duration = parseFloat(item.duration);
 
-            const minPriceValue = parseFloat(minPrice);
-            const maxPriceValue = parseFloat(maxPrice);
-            const minDurationValue = parseFloat(minDuration);
-            const maxDurationValue = parseFloat(maxDuration);
+            const isPriceInRange = (!minPrice || price >= parseFloat(minPrice)) && (!maxPrice || price <= parseFloat(maxPrice));
+            const isDurationInRange = (!minDuration || duration >= parseFloat(minDuration)) && (!maxDuration || duration <= parseFloat(maxDuration));
 
-            const isPriceValid = !isNaN(minPriceValue) && !isNaN(maxPriceValue);
-            const isDurationValid = !isNaN(minDurationValue) && !isNaN(maxDurationValue);
-
-            const isPriceInRange = (!minPrice || price >= minPriceValue) && (!maxPrice || price <= maxPriceValue);
-            const isDurationInRange = (!minDuration || duration >= minDurationValue) && (!maxDuration || duration <= maxDurationValue);
-
-            return isPriceValid && isDurationValid && isPriceInRange && isDurationInRange;
+            return isPriceInRange && isDurationInRange;
         });
 
         setFilteredItems(filteredItems);

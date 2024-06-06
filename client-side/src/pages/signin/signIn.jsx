@@ -36,11 +36,7 @@ const SignIn = () => {
 
       const data = await response.json();
 
-      console.log('lol :', data.email);
-      console.log('utilisateur enregistré');
-      console.log(formData.email);
-
-      toLogin(); // Appel de la fonction toLogin après l'enregistrement réussi
+      toLogin(); 
     } catch (error) {
       console.error('Error:', error);
     }

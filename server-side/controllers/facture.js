@@ -4,6 +4,7 @@ const FactureBillet = require('../models/facture');
 exports.createFacture = async (req, res) => {
     try {
         const nouvelleFacture = new FactureBillet({
+            userId: req.user._id,
             firstName: req.body.firstName,
             lastName: req.body.lastName,
             email: req.body.email,
@@ -21,7 +22,15 @@ exports.createFacture = async (req, res) => {
             taxes: req.body.taxes,
             fraisSupplementaires: req.body.fraisSupplementaires,
             instructionsVoyage: req.body.instructionsVoyage,
-            userId: req.user._id
+            compagnieAerienneRetour: req.body.compagnieAerienneRetour,
+            aeroportDepartRetour: req.body.aeroportDepartRetour,
+            aeroportArriveeRetour: req.body.aeroportArriveeRetour,
+            dateDepartRetour: req.body.dateDepartRetour,
+            heureDepartRetour: req.body.heureDepartRetour,
+            dateArriveeRetour: req.body.dateArriveeRetour,
+            heureArriveeRetour: req.body.heureArriveeRetour,
+            dureeAller: req.body.dureeAller,
+            dureeRetour: req.body.dureeRetour,
         });
         await nouvelleFacture.save();
         res.status(200).json({ message: 'Facture created successfully' });

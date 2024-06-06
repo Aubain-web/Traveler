@@ -1,37 +1,29 @@
 import React from 'react';
-import { useEffect } from 'react';
 import "./header.css";
 import earthMenuImage from "../../assets/images/earth-menu.svg";
 import logoImage from "../../assets/images/logo-no-background.svg";
-import { useUser } from "../context/userContext";
+import { useUser } from "../context2/useContext.jsx";
 import { Link } from 'react-router-dom';
 
 const HeaderCp = () => {
-    const { user, logout, isTokenValid } = useUser();
-    const lastName = user ? user.lastName : undefined;
-    useEffect(() => {
-        if (user) {
-            // Faites quelque chose avec user.lastName ici
-            console.log('lastename',lastName);
-        }
-    }, [user]);
+    const { user, isLoggedIn, logout } = useUser();
 
     return (
         <div className="contenthead">
             <div className="dropdown">
-                <img src={earthMenuImage} alt="dropdown" width="60"/>
+                <img src={earthMenuImage} alt="dropdown" width="60" />
                 <div className="dropdown-content">
-                    {user && isTokenValid() ? (
+                    {isLoggedIn ? (
                         <>
                             <p>Email: {user.email}</p>
                             <Link to="/dashboard">Dashboard</Link>
                             <a onClick={logout}>Se déconnecter</a>
+                            <div className="user">Bienvenue, {user.lastName} !</div>
                         </>
                     ) : (
                         <>
-                            <Link to="/login">Login</Link>
-                            <Link to="/signIn">Sign In</Link>
-                            <a href="#">Link 3</a>
+                            <Link to="/login">Connexion</Link>
+                            <Link to="/signIn">Inscription</Link>
                         </>
                     )}
                 </div>
@@ -41,7 +33,6 @@ const HeaderCp = () => {
                     <img src={logoImage} alt="Logo" width="130" />
                 </Link>
             </div>
-            {user && <div >Bienvenue, {user.firstName} !</div>}
         </div>
     );
 };

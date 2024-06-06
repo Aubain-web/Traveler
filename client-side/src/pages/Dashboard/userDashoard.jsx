@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { useUser } from '../../componnents/context/userContext.jsx';
+//import { useUser } from '../../componnents/context/userContext.jsx';
+import {useUser} from "../../componnents/context2/useContext.jsx";
 import { useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './userDashboard.css';
@@ -8,14 +9,15 @@ import { Link } from 'react-router-dom';
 
 
 const UserDashboard = () => {
-    const { user, setUser, logout } = useUser();
+    const { user, logout } = useUser();
     const [userData, setUserData] = useState(null);
     const navigate = useNavigate();
 
     useEffect(() => {
         const fetchUserData = async () => {
+            console.log('userId dashboard :', user._id);
             try {
-                const response = await fetch(`http://localhost:3001/pages/user/${user.userId}`);
+                const response = await fetch(`http://localhost:3001/pages/user/${user._id}`);
                 if (!response.ok) {
                     throw new Error('Failed to fetch user data');
                 }
@@ -45,30 +47,28 @@ const UserDashboard = () => {
                                         <img src={utilisateur}
                                              alt="Generic placeholder image" className="img-fluid img-thumbnail mt-4 mb-2"
                                              style={{ width: '150px', zIndex: '1' }} />
-                                        <button type="button" className="btn btn-outline-dark" data-mdb-ripple-color="dark" style={{ zIndex: '1' }}>
+                                        <button
+                                            type="button"
+                                            className="btn btn-outline-dark d-flex align-items-center justify-content-center w-75 px-4 py-2"
+                                            data-mdb-ripple-color="dark"
+                                            style={{ zIndex: '1', whiteSpace: 'nowrap' }}
+                                        >
                                             Edit profile
                                         </button>
+
                                     </div>
                                     <div className="ms-3" style={{ marginTop: '130px' }}>
                                         <h5>{userData.lastName}</h5>
                                     </div>
                                     <div className="ms-3" style={{ marginTop: '130px' }}>
-                                        <Link to='/'>Accueil</Link>
+                                        <Link to='/' style={{textDecoration : "none", color : "white", cursor : "pointer"}}> Accueil </Link>
                                     </div>
                                 </div>
                                 <div className="p-4 text-black" style={{ backgroundColor: '#f8f9fa' }}>
                                     <div className="d-flex justify-content-end text-center py-1">
-                                        <div>
-                                            <p className="mb-1 h5">253</p>
-                                            <p className="small text-muted mb-0">Photos</p>
-                                        </div>
                                         <div className="px-3">
-                                            <p className="mb-1 h5">1026</p>
-                                            <p className="small text-muted mb-0">Followers</p>
-                                        </div>
-                                        <div>
-                                            <p className="mb-1 h5">478</p>
-                                            <p className="small text-muted mb-0">Following</p>
+                                            <p className="mb-1 h5">Factures</p>
+                                            <p className="small text-muted mb-0">Facture count</p>
                                         </div>
                                     </div>
                                 </div>
@@ -76,8 +76,8 @@ const UserDashboard = () => {
                                     <div className="mb-5">
                                         <p className="lead fw-normal mb-1">About</p>
                                         <div className="p-4" style={{ backgroundColor: '#f8f9fa' }}>
-                                            <p className="font-italic mb-1">firstName : {userData.firstName}</p>
-                                            <p className="font-italic mb-1">lastName : {userData.lastName}</p>
+                                            <p className="font-italic mb-1">Prénom : {userData.firstName}</p>
+                                            <p className="font-italic mb-1">Nom : {userData.lastName}</p>
                                             <p className="font-italic mb-0">email : {userData.email}</p>
                                         </div>
                                     </div>
@@ -85,28 +85,11 @@ const UserDashboard = () => {
                                         <p className="lead fw-normal mb-0">Votre historique</p>
                                         <p className="mb-0"><a href="#!" className="text-muted">Show all</a></p>
                                     </div>
-                                    <div className="row g-2">
-                                        <div className="col mb-2">
-                                            <img src="https://mdbcdn.b-cdn.net/img/Photos/Lightbox/Original/img%20(112).webp"
-                                                 alt="image 1" className="w-100 rounded-3" />
-                                        </div>
-                                        <div className="col mb-2">
-                                            <img src="https://mdbcdn.b-cdn.net/img/Photos/Lightbox/Original/img%20(107).webp"
-                                                 alt="image 1" className="w-100 rounded-3" />
-                                        </div>
-                                    </div>
-                                    <div className="row g-2">
-                                        <div className="col">
-                                            <img src="https://mdbcdn.b-cdn.net/img/Photos/Lightbox/Original/img%20(108).webp"
-                                                 alt="image 1" className="w-100 rounded-3" />
-                                        </div>
-                                        <div className="col">
-                                            <img src="https://mdbcdn.b-cdn.net/img/Photos/Lightbox/Original/img%20(114).webp"
-                                                 alt="image 1" className="w-100 rounded-3" />
-                                        </div>
-                                    </div>
+
                                 </div>
-                                <button onClick={logout}>Logout</button> {/* Bouton de déconnexion */}
+                                <button className="btn btn-outline-dark d-flex align-items-center justify-content-center w-25 mb-3 ms-3 px-4 py-2"
+                                        data-mdb-ripple-color="dark"
+                                        style={{ zIndex: '1', whiteSpace: 'nowrap' }} onClick={logout}>déconnexion</button> {/* Bouton de déconnexion */}
                             </div>
                         </div>
                     </div>

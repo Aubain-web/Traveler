@@ -1,10 +1,10 @@
+// SearchResult.jsx
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import './results.css';
 import ModalComponent from '../modalComponent/modalComponent.jsx';
-import {useUser} from "../context/userContext.jsx";
 import FiltreTravel from '../filtre/filtreTravel.jsx';
-import './results.css';
+import { useUser } from "../context2/useContext.jsx";
 
 const SearchResult = ({ items }) => {
     const location = useLocation();
@@ -15,6 +15,7 @@ const SearchResult = ({ items }) => {
     const dateArrive = params.get('dateArrive');
     const adults = params.get('adults');
     const children = params.get('children');
+
     const [flightData, setFlightData] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -22,6 +23,7 @@ const SearchResult = ({ items }) => {
     const [open, setOpen] = useState(false);
     const { user } = useUser();
     const [allItems, setAllItems] = useState([]);
+    const [filteredItems, setFilteredItems] = useState([]);
 
     useEffect(() => {
         const fetchFlightData = async () => {
@@ -31,8 +33,8 @@ const SearchResult = ({ items }) => {
                     throw new Error('Failed to fetch flight information');
                 }
                 const data = await response.json();
-                //setFlightData(data.data);
                 setAllItems(data.data);
+                console.log(data.data);
                 setIsLoading(false);
             } catch (error) {
                 console.error('Error fetching flight data:', error.message);
@@ -42,16 +44,11 @@ const SearchResult = ({ items }) => {
         };
 
         fetchFlightData();
-
-        return () => {
-
-        };
     }, [translatedDepart, translatedArrive, dateDepart, dateArrive, adults, children]);
 
     useEffect(() => {
-        // Update flight data when items change
-        setFlightData(allItems);
-    }, [allItems]);
+        setFlightData(filteredItems.length > 0 ? filteredItems : allItems);
+    }, [allItems, filteredItems]);
 
     const handleFlightClick = (flight) => {
         setSelectedFlight(flight);
@@ -63,34 +60,20 @@ const SearchResult = ({ items }) => {
     };
 
     const renderFlightBlocks = () => {
-        // Vérifie si des données de vol ont été récupérées et si elles sont définies
-        if (!flightData || flightData.length === 0 && !isLoading && error) {
-            return (
-                <div className="error-message">{error}</div>
-            );
+        if (error && !isLoading && (!flightData || flightData.length === 0)) {
+            return <div className="error-message">{error}</div>;
         }
 
-        const flightBlocks = [];
-        for (let i = 0; i < flightData.length; i += 4) {
-            const flightBlock = flightData.slice(i, i + 4);
-            flightBlocks.push(
-                <div key={i} className="flight-block">
-                    {flightBlock.map((flight, index) => (
-                        <div key={index} className="flight-item" onClick={() => handleFlightClick(flight)} /*onClick={() => handleFlightClick(flight)}*/>
-                            <p>Référence de vol ID: {flight.id}</p>
-                            <p>Instant Ticketing Required: {flight.instantTicketingRequired.toString()}</p>
-                            <p>Price:  {flight.price.total}</p>
-                            <p>Currency:  {flight.price.currency}</p>
-                        </div>
-                    ))}
-                    <ModalComponent flight={selectedFlight} open={open} onClose={handleClose} aria-labelledby="modal-title"
-                                    aria-describedby="modal-description"    className="modal-box"
-                    />
-                </div>
-            );
-        }
-        return flightBlocks;
+        return flightData.map((flight, index) => (
+            <div key={index} className="flight-item" onClick={() => handleFlightClick(flight)}>
+                <p>Référence de vol ID: {flight.id}</p>
+                <p>Instant Ticketing Required: {flight.instantTicketingRequired.toString()}</p>
+                <p>Price: {flight.price?.total}</p>
+                <p>Currency: {flight.price?.currency}</p>
+            </div>
+        ));
     };
+
     return (
         <div className="search-result">
             <div className="search-result-content">
@@ -99,13 +82,15 @@ const SearchResult = ({ items }) => {
                     <p>Loading...</p>
                 ) : (
                     <div>
-                        {renderFlightBlocks()}
+                        <div className="flight-block">{renderFlightBlocks()}</div>
                     </div>
                 )}
             </div>
+            {selectedFlight && (
+                <ModalComponent flight={selectedFlight} open={open} onClose={handleClose} aria-labelledby="modal-title" aria-describedby="modal-description" className="modal-box" />
+            )}
         </div>
     );
 };
 
 export default SearchResult;
-
