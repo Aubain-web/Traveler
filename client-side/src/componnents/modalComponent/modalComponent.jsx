@@ -9,6 +9,7 @@ import AircraftDictionary from "../../dictionnaire-aircraft/airCraftCode.jsx";
 import CompagnieCarrier from "../../dictionnaire-carier/carierCode.jsx";
 import ville from "../../dictionaire-ville/villeConv.jsx";
 import AirportCode from "../../aeroportCode/aeroportCode.jsx";
+<<<<<<< HEAD
 import Cookies from "js-cookie";
 
 const ModalComponent = ({ flight, open, onClose }) => {
@@ -17,6 +18,13 @@ const ModalComponent = ({ flight, open, onClose }) => {
     //const userId = user._id;
     const compagnieAerienne = CompagnieCarrier()[flight.itineraries[0].segments[0].carrierCode];
     console.log(compagnieAerienne);
+=======
+
+const ModalComponent = ({ flight, open, onClose }) => {
+    const { user } = useUser();
+    //const Id = user._id;
+    const compagnieAerienne = CompagnieCarrier()[flight.itineraries[0].segments[0].carrierCode];
+>>>>>>> c9f0fce8d43cc62659d6920659d0ebef1934d5ca
     const aeroportArrivee = AirportCode()[flight.itineraries[0].segments[0].arrival.iataCode];
     const aeroportDepart = AirportCode()[flight.itineraries[0].segments[0].departure.iataCode];
     const dureAller = TimePeriod()[flight.itineraries[0].duration];
@@ -36,6 +44,7 @@ const ModalComponent = ({ flight, open, onClose }) => {
     const handlePayment = async (e) => {
         e.preventDefault();
 
+<<<<<<< HEAD
         if (!isLoggedIn) {
             alert("Vous devez vous connecter pour effectuer un paiement.");
             return;
@@ -48,6 +57,13 @@ const ModalComponent = ({ flight, open, onClose }) => {
             email: user.email,
             adults: flight.travelerPricings.filter(tp => tp.travelerType === "ADULT").length,
             children : flight.travelerPricings.filter(tp => tp.travelerType === "CHILD").length,
+=======
+        const infoLog = {
+            //userId: Id,
+            firstName: user.firstName,
+            lastName: user.lastName,
+            email: user.email,
+>>>>>>> c9f0fce8d43cc62659d6920659d0ebef1934d5ca
             compagnieAerienne: compagnieAerienne,
             aeroportDepart: aeroportDepart,
             aeroportArrivee: aeroportArrivee,
@@ -55,7 +71,11 @@ const ModalComponent = ({ flight, open, onClose }) => {
             heureDepart: flight.itineraries[0].segments[0].departure.at.split('T')[1], // Extraire l'heure
             dateArrivee: flight.itineraries[0].segments[0].arrival.at.split('T')[0], // Extraire la date
             heureArrivee: flight.itineraries[0].segments[0].arrival.at.split('T')[1], // Extraire l'heure
+<<<<<<< HEAD
             numeroSiege: "12A",
+=======
+            numeroSiege: null,
+>>>>>>> c9f0fce8d43cc62659d6920659d0ebef1934d5ca
             classe: flight.travelerPricings[0].fareDetailsBySegment[0].cabin,
             montantPaye: parseFloat(flight.price.total),
             devise: flight.price.currency,
@@ -68,6 +88,7 @@ const ModalComponent = ({ flight, open, onClose }) => {
             compagnieAerienneRetour: compagnieAerienneRetour,
             aeroportDepartRetour: aeroportDepartRetour,
             aeroportArriveeRetour: aeroportArriveeRetour,
+<<<<<<< HEAD
             dateDepartRetour: retourSegment ? retourSegment.departure.at.split('T')[0] : null,
             heureDepartRetour: retourSegment ? retourSegment.departure.at.split('T')[1] : null,
             dateArriveeRetour: retourSegment ? retourSegment.arrival.at.split('T')[0] : null,
@@ -76,6 +97,16 @@ const ModalComponent = ({ flight, open, onClose }) => {
             dureeRetour: dureRetour
         };
         //console.log('Request Body:', JSON.stringify(infoLog, null, 2));
+=======
+            dateDepartRetour: retourSegment ? retourSegment.departure.at.split('T')[0] : null, // Extraire la date
+            heureDepartRetour: retourSegment ? retourSegment.departure.at.split('T')[1] : null, // Extraire l'heure
+            dateArriveeRetour: retourSegment ? retourSegment.arrival.at.split('T')[0] : null, // Extraire la date
+            heureArriveeRetour: retourSegment ? retourSegment.arrival.at.split('T')[1] : null, // Extraire l'heure
+            dureeAller: dureAller,
+            dureeRetour: flight.itineraries[1]?.duration
+        };
+        console.log('Request Body:', infoLog);
+>>>>>>> c9f0fce8d43cc62659d6920659d0ebef1934d5ca
 
         try {
             const response = await fetch('http://localhost:3001/user/facture/create', {
@@ -83,21 +114,31 @@ const ModalComponent = ({ flight, open, onClose }) => {
                 mode: "cors",
                 headers: {
                     'Content-Type': 'application/json',
+<<<<<<< HEAD
                     'Authorization': `Bearer ${token.trim()}`,
+=======
+>>>>>>> c9f0fce8d43cc62659d6920659d0ebef1934d5ca
                 },
                 body: JSON.stringify(infoLog),
             });
 
             if (!response.ok) {
+<<<<<<< HEAD
                 const errorData = await response.json();
                 console.error('Error response data:', errorData);
+=======
+>>>>>>> c9f0fce8d43cc62659d6920659d0ebef1934d5ca
                 throw new Error('Failed to create invoice');
             }
 
             const data = await response.json();
+<<<<<<< HEAD
             //console.log('response : ', data);
 
             alert('Votre facture a bien été créée, vous pouvez vous rendre dans votre dashboard !');
+=======
+            console.log('Invoice created successfully:', data);
+>>>>>>> c9f0fce8d43cc62659d6920659d0ebef1934d5ca
             onClose(); // Ferme le modal après le paiement
         } catch (error) {
             console.error('Error creating invoice:', error);
@@ -143,6 +184,21 @@ const ModalComponent = ({ flight, open, onClose }) => {
                             </>
                         )}
                         <tr>
+<<<<<<< HEAD
+=======
+                            <td>Compagnie Aérienne:</td>
+                            <td>{compagnieAerienne}</td>
+                        </tr>
+                        <tr>
+                            <td>Nom:</td>
+                            <td>{user.lastName}</td>
+                        </tr>
+                        <tr>
+                            <td>Prénom:</td>
+                            <td>{user.firstName}</td>
+                        </tr>
+                        <tr>
+>>>>>>> c9f0fce8d43cc62659d6920659d0ebef1934d5ca
                             <td>Adulte(s):</td>
                             <td>{flight.travelerPricings.filter(tp => tp.travelerType === "ADULT").length}</td>
                         </tr>
@@ -151,6 +207,7 @@ const ModalComponent = ({ flight, open, onClose }) => {
                             <td>{flight.price.total} {flight.price.currency}</td>
                         </tr>
                         <tr>
+<<<<<<< HEAD
                             <td> classe :</td>
                             <td> {flight.travelerPricings[0].fareDetailsBySegment[0].cabin} </td>
                         </tr>
@@ -162,6 +219,15 @@ const ModalComponent = ({ flight, open, onClose }) => {
                             <td>{aeroportDepart}</td>
                         </tr>
                         <tr>
+=======
+                            <td>Aller</td>
+                        </tr>
+                        <tr>
+                            <td>Aéroport de départ:</td>
+                            <td>{aeroportDepart}</td>
+                        </tr>
+                        <tr>
+>>>>>>> c9f0fce8d43cc62659d6920659d0ebef1934d5ca
                             <td>Départ:</td>
                             <td>{flight.itineraries[0].segments[0].departure.at}</td>
                         </tr>

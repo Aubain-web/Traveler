@@ -82,6 +82,7 @@ const CompagnieCarrier = () =>{
         'WY': 'Oman Air',
         'GF': 'Gulf Air',
         'ME': 'Middle East Airlines',
+<<<<<<< HEAD
         'AS': 'Alaska Airlines',
         'BI': 'Royal Brunei Airlines',
         'B6': 'JetBlue',
@@ -254,6 +255,8 @@ const CompagnieCarrier = () =>{
         'ID': 'Batik Air',
         'QG': 'Citilink',
 
+=======
+>>>>>>> c9f0fce8d43cc62659d6920659d0ebef1934d5ca
     };
 
     const compagnieVol = {};

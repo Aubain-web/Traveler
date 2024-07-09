@@ -4,7 +4,11 @@ const FactureBillet = require('../models/facture');
 exports.createFacture = async (req, res) => {
     try {
         const nouvelleFacture = new FactureBillet({
+<<<<<<< HEAD
             userId: req.user.userId,
+=======
+            userId: req.user._id,
+>>>>>>> c9f0fce8d43cc62659d6920659d0ebef1934d5ca
             firstName: req.body.firstName,
             lastName: req.body.lastName,
             email: req.body.email,
@@ -33,8 +37,11 @@ exports.createFacture = async (req, res) => {
             heureArriveeRetour: req.body.heureArriveeRetour,
             dureeAller: req.body.dureeAller,
             dureeRetour: req.body.dureeRetour,
+<<<<<<< HEAD
             createdAt: new Date().toISOString(),
             updatedAt: new Date().toISOString()
+=======
+>>>>>>> c9f0fce8d43cc62659d6920659d0ebef1934d5ca
         });
         await nouvelleFacture.save();
         console.log('facture :', nouvelleFacture );

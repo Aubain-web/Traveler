@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 /*.filtre-global {
+=======
+.filtre-global {
+>>>>>>> c9f0fce8d43cc62659d6920659d0ebef1934d5ca
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 20px;
@@ -62,6 +66,7 @@
 
 .filtre:nth-child(4) {
     grid-column: 3 / span 2;
+<<<<<<< HEAD
 }*/
 .sort-filter {
     display: flex;
@@ -119,3 +124,6 @@
 }
 
 
+=======
+}
+>>>>>>> c9f0fce8d43cc62659d6920659d0ebef1934d5ca

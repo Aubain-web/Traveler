@@ -56,6 +56,7 @@ const TimePeriod = () => {
         "PT5H10M": "5h 10m",
         "PT5H15M": "5h 15m",
         "PT5H20M": "5h 20m",
+<<<<<<< HEAD
         "PT5H21M": "5h 21m", "PT5H22M": "5h 22m", "PT5H23M": "5h 23m", "PT5H24M": "5h 24m", "PT5H25M": "5h 25m",
         "PT5H26M": "5h 26m", "PT5H27M": "5h 27m", "PT5H28M": "5h 28m", "PT5H29M": "5h 29m", "PT5H30M": "5h 30m",
         "PT5H31M": "5h 31m", "PT5H32M": "5h 32m", "PT5H33M": "5h 33m", "PT5H34M": "5h 34m", "PT5H35M": "5h 35m",
@@ -161,6 +162,8 @@ const TimePeriod = () => {
         "PT13H50M": "13h 50m", "PT13H51M": "13h 51m", "PT13H52M": "13h 52m", "PT13H53M": "13h 53m", "PT13H54M": "13h 54m",
         "PT13H55M": "13h 55m", "PT13H56M": "13h 56m", "PT13H57M": "13h 57m", "PT13H58M": "13h 58m", "PT13H59M": "13h 59m",
         "PT14H00M": "14h 00m"
+=======
+>>>>>>> c9f0fce8d43cc62659d6920659d0ebef1934d5ca
     };
 
     const time = {};

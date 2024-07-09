@@ -15,6 +15,11 @@ const TravelResult = () => {
 
     return (
         <div>
+<<<<<<< HEAD
+=======
+            <HeaderCp />
+            <FiltreTravel items={allItems} setFilteredItems={setFilteredItems} />
+>>>>>>> c9f0fce8d43cc62659d6920659d0ebef1934d5ca
             <SearchResult
                 depart={translatedDepart}
                 arrive={translatedArrive}

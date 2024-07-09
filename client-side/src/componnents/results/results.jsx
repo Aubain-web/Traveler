@@ -1,10 +1,19 @@
+<<<<<<< HEAD
 import 'bootstrap/dist/css/bootstrap.min.css';
+=======
+// SearchResult.jsx
+>>>>>>> c9f0fce8d43cc62659d6920659d0ebef1934d5ca
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import './results.css';
 import ModalComponent from '../modalComponent/modalComponent.jsx';
+<<<<<<< HEAD
 import { useUser } from "../context2/useContext.jsx";
 import FiltreTravel from "../filtre/filtreTravel.jsx";
+=======
+import FiltreTravel from '../filtre/filtreTravel.jsx';
+import { useUser } from "../context2/useContext.jsx";
+>>>>>>> c9f0fce8d43cc62659d6920659d0ebef1934d5ca
 
 const SearchResult = ({ items }) => {
     const location = useLocation();
@@ -49,6 +58,7 @@ const SearchResult = ({ items }) => {
     }, [translatedDepart, translatedArrive, dateDepart, dateArrive, adults, children]);
 
     useEffect(() => {
+<<<<<<< HEAD
         const filteredData = allItems.filter(flight => {
             const price = parseFloat(flight.price.total);
             return maxPrice ? price <= maxPrice : true;
@@ -61,6 +71,8 @@ const SearchResult = ({ items }) => {
     }, [maxPrice, sortOrder, allItems]);
 
     useEffect(() => {
+=======
+>>>>>>> c9f0fce8d43cc62659d6920659d0ebef1934d5ca
         setFlightData(filteredItems.length > 0 ? filteredItems : allItems);
     }, [allItems, filteredItems]);
 
@@ -73,6 +85,7 @@ const SearchResult = ({ items }) => {
         setOpen(false);
     };
 
+<<<<<<< HEAD
     const renderFlightCards = () => {
         if (error && !isLoading && (!flightData || flightData.length === 0)) {
             return <div className="alert alert-danger">{error}</div>;
@@ -87,6 +100,19 @@ const SearchResult = ({ items }) => {
                         <p className="card-text">Price: {flight.price?.total} {flight.price?.currency}</p>
                     </div>
                 </div>
+=======
+    const renderFlightBlocks = () => {
+        if (error && !isLoading && (!flightData || flightData.length === 0)) {
+            return <div className="error-message">{error}</div>;
+        }
+
+        return flightData.map((flight, index) => (
+            <div key={index} className="flight-item" onClick={() => handleFlightClick(flight)}>
+                <p>Référence de vol ID: {flight.id}</p>
+                <p>Instant Ticketing Required: {flight.instantTicketingRequired.toString()}</p>
+                <p>Price: {flight.price?.total}</p>
+                <p>Currency: {flight.price?.currency}</p>
+>>>>>>> c9f0fce8d43cc62659d6920659d0ebef1934d5ca
             </div>
         ));
     };
@@ -103,8 +129,13 @@ const SearchResult = ({ items }) => {
                         </div>
                     </div>
                 ) : (
+<<<<<<< HEAD
                     <div className="row justify-content-center">
                         {renderFlightCards()}
+=======
+                    <div>
+                        <div className="flight-block">{renderFlightBlocks()}</div>
+>>>>>>> c9f0fce8d43cc62659d6920659d0ebef1934d5ca
                     </div>
                 )}
             </div>
