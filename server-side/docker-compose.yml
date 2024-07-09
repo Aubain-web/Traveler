@@ -1,0 +1,21 @@
+version: "3.8"
+
+services:
+  app-node:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: traveler-server
+    ports:
+      - "3001:3001"
+    environment:
+      - HOSTDB=mongodb
+      - PORTD=27017
+    depends_on:
+      - mongodb
+
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+    ports:
+      - "27018:27017"

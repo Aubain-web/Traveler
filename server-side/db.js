@@ -1,7 +1,9 @@
-// db.js
-
 const mongoose = require('mongoose');
 
+const host = process.env.HOSTDB || 'localhost';
+const port = process.env.PORTDB || 27017;
+//'mongodb+srv://aubain:aubain99@cluster0.g3x4nwn.mongodb.net/'
+//`mongodb://${host}:${port}/Traveler`,
 async function connectToDatabase() {
   try {
     await mongoose.connect('mongodb+srv://aubain:aubain99@cluster0.g3x4nwn.mongodb.net/', {

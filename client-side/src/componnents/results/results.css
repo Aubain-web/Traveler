@@ -1,22 +1,63 @@
 /* Style pour le corps de la page */
 .search-result {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 100%;
-    margin-top:20px;
+    margin-top:7%;
 }
 
 .search-result-content {
     max-width: 800px;
     width: 100%;
+
+}
+/* Style pour le composant FiltreTravel */
+.mt-5 {
+    margin-top: 6rem !important;
+}
+
+/* Style pour les cartes de vol */
+.flight-card {
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.flight-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+}
+
+
+/* ***************************************** */
+.filter-options {
+    margin-bottom: 20px;
+}
+
+.filter-options label {
+    display: flex;
+    align-items: center;
+}
+
+.filter-options input {
+    margin-left: 10px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
 }
 
 /* Style pour le titre "Search result" */
 .search-result-content h2 {
     font-size: 24px;
     margin-bottom: 20px;
-    margin-left: 320px;
+    margin-left: 40%;
+}
+.search-result-content p {
+    font-size: 24px;
+    margin-bottom: 20px;
+    margin-left: 40%;
 }
 
 /* Style pour les blocs de résultats */
@@ -29,12 +70,12 @@
 .flight-item {
     /*width: calc(33.33% - 20px);  Ajustez la largeur des éléments selon vos besoins */
     width : auto;
-    margin-bottom: 20px; /* Espace entre les éléments */
-    border: 1px solid #ccc; /* Bordure pour séparer les éléments */
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
     padding: 10px;
     border-radius: 8px;
-    cursor: pointer; /* Rendre le bloc cliquable*/
-    transition: background-color 0.3s ease; /* Ajouter une transition pour l'effet visuel*/
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
 /* Style pour les détails de vol */
@@ -44,7 +85,7 @@
 
 /* Style pour le message de chargement */
 .loading-message {
-    font-size: 18px;
+    font-size: 15px;
     text-align: center;
 }
 
@@ -79,18 +120,52 @@ a:hover {
 }*/
 
 .flight-item:hover {
-    background-color: #f0f0f0; /* Changer la couleur de fond lorsqu'il est survolé */
+    background-color: #f0f0f0;
 }
 
 
 .modal-box {
     background-color: #fefefe;
-    margin: 0 auto; /* Pour centrer horizontalement */
-    margin-top: 10%; /* Pour centrer verticalement */
+    margin: 0 auto;
+    margin-top: 10%;
     padding: 20px;
     border: 1px solid #888;
     width: 80%;
     max-width: 600px;
     border-radius: 8px;
     position: relative;
+}
+@media only screen and(max-width: 480px){
+    .search-result {
+        margin-top: 40px;
+    }
+
+    .search-result-content {
+        align-items: center;
+        width: 100%;
+    }
+
+    .search-result-content h2 {
+        font-size: 15px;
+    }
+
+    .search-result-content p {
+        font-size: 15px;
+    }
+
+    .flight-block {
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+
+    .flight-item {
+        width: 90%;
+        margin-bottom: 10px;
+    }
+
+    .modal-box {
+        width: 95%;
+        margin-top: 30%;
+    }
 }

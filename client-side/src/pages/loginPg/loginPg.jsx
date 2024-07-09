@@ -1,6 +1,6 @@
-import { useNavigate} from "react-router-dom";
-import { useState, useEffect } from "react";
-import { useUser } from "../../componnents/context/userContext.jsx";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { useUser } from "../../componnents/context2/useContext.jsx";
 import HeaderCp from "../../componnents/header/headerCp.jsx";
 import './login.css';
 
@@ -9,9 +9,7 @@ const LoginPg = () => {
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const navigate = useNavigate();
-    const [data, setData] = useState();
     const { login } = useUser();
-
 
     const handleLogin = async (e) => {
         e.preventDefault();
@@ -36,12 +34,11 @@ const LoginPg = () => {
             }
 
             const data = await response.json();
-            const token = data.token;
-            setData(data);
+            const { token, expiryDate, user } = data;
+
             if (token) {
-                login(data, token); // Mettre à jour l'état d'authentification de votre application avec les données utilisateur si nécessaire
-                console.log(data.user.lastName)
-                navigate('/'); // Rediriger l'utilisateur vers la page principale après la connexion
+                login({ token, expiryDate, user });
+                navigate('/');
             } else {
                 console.error('Token not found in response');
             }
@@ -53,9 +50,8 @@ const LoginPg = () => {
 
     return (
         <div className="login">
-            <HeaderCp />
             <div className="formulaire">
-                <form>
+                <form onSubmit={handleLogin}>
                     <h2>Login</h2>
                     <label htmlFor="username">Username:</label>
                     <br />
@@ -65,13 +61,23 @@ const LoginPg = () => {
                     <br />
                     <input type="password" placeholder="mot de passe" value={password} onChange={(e) => setPassword(e.target.value)} className="pwd" name="pwd" />
                     {error && <p className="error">{error}</p>}
+                    <button type="submit" onClick={handleLogin}>Login</button>
                 </form>
                 <div className="option">
-                    <button onClick={handleLogin}>
-                        Login
-                    </button>
                     <p>
-                        <a style={{ color: 'red' }} onClick={()=>{navigate('/signin')}}> Vous n'avez pas de compte ?</a>
+                        <a
+                            style={{
+                                color: 'red',
+                                fontWeight: 'bold',
+                                fontSize: '1.2em',
+                                padding: '5px 10px',
+                                borderRadius: '5px',
+                                textDecoration: 'none'
+                            }}
+                            onClick={() => { navigate('/signin') }}
+                        >
+                            Vous n'avez pas de compte ?
+                        </a>
                     </p>
                 </div>
             </div>

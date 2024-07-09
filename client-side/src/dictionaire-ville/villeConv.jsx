@@ -1,6 +1,7 @@
 const  ville = () => {
     const dict = {
         "London": "LON",
+        "Londre" : "LON",
         "New York": "NYC",
         "Los Angeles": "LAX",
         "Paris": "PAR",

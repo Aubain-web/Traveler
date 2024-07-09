@@ -6,8 +6,9 @@ const userCtrl = require('../controllers/users')
 
 router.post('/signIn', userCtrl.signIn);
 router.post('/login', userCtrl.login);
+router.post('/logout', userCtrl.logout);
 router.get('/:userId', userCtrl.userFind);
-router.get('/findFactures', userCtrl.findFacture)
+router.get('/findFactures', userCtrl.findFacture);
 
 /*router.post('/loginPg', async(req, res) => {
     try {

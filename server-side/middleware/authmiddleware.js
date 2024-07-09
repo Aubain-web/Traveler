@@ -14,7 +14,7 @@ exports.authenticate = (req, res, next) => {
             return res.status(403).json({ message: 'Jeton invalide' });
         }
 
-        req.user = decoded.userId;
+        req.user = decoded;
         next();
     });
 };

@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  frontend:
+    build:
+      context: ./client-side
+    ports:
+      - "5000:5000"
+
+  backend:
+    build:
+      context: ./server-side
+    ports:
+      - "3001:3001"
+    depends_on:
+      - mongodb
+    environment:
+      HOSTDB: mongodb
+      PORTDB: 27017
+      MONGODB_DATABASE: Traveler
+
+  mongodb:
+    image: mongo:latest

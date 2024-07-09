@@ -7,11 +7,13 @@ import HomePg from "./pages/homePg/home";
 import ResultPg from "./componnents/results/results.jsx";
 import SearchResult from "./componnents/results/results.jsx";
 import UserDashboard from "./pages/Dashboard/userDashoard.jsx";
-import { UserProvider } from "./componnents/context/userContext.jsx";
+//import { UserProvider } from "./componnents/context/userContext.jsx";
+import {UserProvider} from "./componnents/context2/useContext.jsx";
 import TravelResult from "./pages/Travels/travelResult.jsx";
 import HeaderCp from "./componnents/header/headerCp.jsx";
 import UserInfo from "./componnents/userInfo/userInfo.jsx";
 //import BodySearch from "./componnents/bodySearch/bodySearch.jsx";
+import FooterCp from "./componnents/footer/footerCp.jsx"
 
 //import Last from "./componnents/last";
 
@@ -21,19 +23,20 @@ import UserInfo from "./componnents/userInfo/userInfo.jsx";
 
 function App() {
   return (
-    <BrowserRouter>
-      <UserProvider>
-        <Routes>
-          <Route path='/' element={<HomePg/>}></Route>
-          <Route path='/userInfo' element={<UserInfo/>}></Route>
-          <Route path='/login' element={<LoginPg/>}></Route>
-          <Route path='/signin' element={<SignIn/>}></Route>
-          <Route path='/search-result' element={<SearchResult/>}></Route>
-          <Route path='/travel-result' element={<TravelResult/>}></Route>
-          <Route path='/dashboard' element={<UserDashboard/>}></Route>
-        </Routes>
-      </UserProvider>
-    </BrowserRouter>
+      <BrowserRouter>
+        <UserProvider>
+          <HeaderCp />
+          <Routes>
+            <Route path="/" element={<HomePg />} />
+            <Route path="/userInfo" element={<UserInfo />} />
+            <Route path="/login" element={<LoginPg />} />
+            <Route path="/signin" element={<SignIn />} />
+            <Route path="/search-result" element={<SearchResult />} />
+            <Route path="/travel-result" element={<TravelResult />} />
+            <Route path="/dashboard" element={<UserDashboard />} />
+          </Routes>
+        </UserProvider>
+      </BrowserRouter>
   );
 }
 

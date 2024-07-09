@@ -1,0 +1,25 @@
+/* home.css */
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+.header, .body-search, .promotion-carousel, .footer {
+    width: 100%;
+    margin: 20px 0; /* Add margin to separate components vertically */
+}
+
+.header {
+    margin-top: 0;
+}
+
+.footer {
+    margin-bottom: 0;
+}

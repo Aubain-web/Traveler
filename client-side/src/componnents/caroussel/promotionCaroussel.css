@@ -1,0 +1,26 @@
+/* PromotionCarousel.css */
+
+.caroussel{
+    position: absolute; /* Positionnement absolu */
+    top: 105%;
+    width : 100%;
+    padding : 60px;
+}
+
+.promotion-carousel {
+   /* width: 100%; */
+    margin: 20px 0;
+
+
+}
+
+.carousel-inner {
+    border-radius: 10px;
+    border: 20px solid transparent ;
+    border-image: linear-gradient(to right, #d5d2d3, #3e4549) 1 stretch;
+}
+
+.carousel-item img {
+    max-height: 500px;
+    object-fit: cover;
+}

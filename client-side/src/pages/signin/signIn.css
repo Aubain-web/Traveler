@@ -43,3 +43,7 @@
   background-color: #a3aac1;
   opacity: 80%;
 }
+
+.button{
+  gap: 40px;
+}

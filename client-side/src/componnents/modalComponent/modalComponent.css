@@ -1,41 +1,89 @@
-.option{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    column-gap: 10px;
+/* modalComponent.css */
+
+/* Styles pour la boîte modale */
+.modal-box {
+    width: 100%;
+    max-width: 600px; /* Largeur maximale de la boîte modale */
+    max-height: 80vh; /* Hauteur maximale de la boîte modale */
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+    margin: auto;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    overflow-y: auto; /* Ajoute une barre de défilement verticale si nécessaire */
 }
 
-.option button:first-child {
-    margin-right: 10px;
-}
-
+/* Styles pour les détails de la modal */
 .modal-details {
-    border: 1px solid #ccc;
-    border-radius: 5px;
     margin-bottom: 20px;
-    font-family: Arial, sans-serif;
 }
 
+/* Styles pour le titre de la modal */
+.modal-details h2 {
+    font-size: 1.5em;
+    margin-bottom: 20px;
+}
+
+/* Styles pour le tableau des détails */
 .modal-details table {
     width: 100%;
     border-collapse: collapse;
+    margin-bottom: 20px;
 }
 
-.modal-details th,
-.modal-details td {
-    border: 1px solid #ccc;
-    padding: 8px;
+/* Styles pour les cellules du tableau */
+.modal-details table td {
+    padding: 8px 10px;
+    border-bottom: 1px solid #eee;
     text-align: left;
+    font-size: 0.9em;
 }
 
-.modal-details th {
-    background-color: #f2f2f2;
-}
-
-.modal-details td:first-child {
+/* Styles pour les titres des cellules */
+.modal-details table td:first-child {
     font-weight: bold;
+    color: #555;
+    width: 50%;
 }
 
-.modal-details tr:last-child td {
-    border-bottom: none;
+/* Styles pour les options de la modal */
+.option {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+/* Styles pour les boutons */
+.option button {
+    flex: 1;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 1em;
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.option button:first-child {
+    background-color: #1976d2;
+    color: #fff;
+}
+
+.option button:first-child:hover {
+    background-color: #115293;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.option button:last-child {
+    background-color: #f44336;
+    color: #fff;
+}
+
+.option button:last-child:hover {
+    background-color: #d32f2f;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
 }

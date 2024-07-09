@@ -1,118 +1,148 @@
 import React, { useState, useEffect } from 'react';
-import { useUser } from '../../componnents/context/userContext.jsx';
-import { useNavigate } from 'react-router-dom';
+import { useUser } from "../../componnents/context2/useContext.jsx";
+import { useNavigate, Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './userDashboard.css';
 import utilisateur from '../../assets/icons/utilisateur.png';
-import { Link } from 'react-router-dom';
-
+import Cookies from "js-cookie";
+import { Modal, Button } from 'react-bootstrap';
 
 const UserDashboard = () => {
-    const { user, setUser, logout } = useUser();
+    const { user, logout } = useUser();
     const [userData, setUserData] = useState(null);
+    const [error, setError] = useState(null);
+    const [selectedFacture, setSelectedFacture] = useState(null);
+    const [showModal, setShowModal] = useState(false);
     const navigate = useNavigate();
+    const token = Cookies.get('jwt')?.trim();
 
     useEffect(() => {
         const fetchUserData = async () => {
+            if (!token) {
+                setError('Token invalide ou expiré.');
+                return;
+            }
+
             try {
-                const response = await fetch(`http://localhost:3001/pages/user/${user.userId}`);
+                const response = await fetch('http://localhost:3001/user/facture/getFacture', {
+                    method: 'GET',
+                    mode: "cors",
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`,
+                    },
+                });
+
                 if (!response.ok) {
-                    throw new Error('Failed to fetch user data');
+                    const errorData = await response.json();
+                    setError(errorData.message || 'Failed to fetch user data');
+                    return;
                 }
+
                 const userData = await response.json();
                 setUserData(userData);
-                console.log(userData);
             } catch (error) {
-                console.error('Error fetching user data:', error);
+                setError('Error fetching user data: ' + error.message);
             }
         };
 
         if (user) {
             fetchUserData();
         }
-    }, [user]);
+    }, [user, token]);
 
+    const handleShowModal = (facture) => {
+        setSelectedFacture(facture);
+        setShowModal(true);
+    };
+
+    const handleCloseModal = () => {
+        setSelectedFacture(null);
+        setShowModal(false);
+    };
+
+    const WelcomPage = () => {
+        navigate('/');
+    }
 
     return (
-        <section className="h-100 gradient-custom-2">
-            <div className="container py-5 h-100">
-                {userData && (
-                    <div className="row d-flex justify-content-center align-items-center h-100">
-                        <div className="col col-lg-9 col-xl-7">
-                            <div className="card">
-                                <div className="rounded-top text-white d-flex flex-row" style={{ backgroundColor: '#000', height: '200px' }}>
-                                    <div className="ms-4 mt-5 d-flex flex-column" style={{ width: '150px' }}>
-                                        <img src={utilisateur}
-                                             alt="Generic placeholder image" className="img-fluid img-thumbnail mt-4 mb-2"
-                                             style={{ width: '150px', zIndex: '1' }} />
-                                        <button type="button" className="btn btn-outline-dark" data-mdb-ripple-color="dark" style={{ zIndex: '1' }}>
-                                            Edit profile
-                                        </button>
-                                    </div>
-                                    <div className="ms-3" style={{ marginTop: '130px' }}>
-                                        <h5>{userData.lastName}</h5>
-                                    </div>
-                                    <div className="ms-3" style={{ marginTop: '130px' }}>
-                                        <Link to='/'>Accueil</Link>
-                                    </div>
-                                </div>
-                                <div className="p-4 text-black" style={{ backgroundColor: '#f8f9fa' }}>
-                                    <div className="d-flex justify-content-end text-center py-1">
-                                        <div>
-                                            <p className="mb-1 h5">253</p>
-                                            <p className="small text-muted mb-0">Photos</p>
-                                        </div>
-                                        <div className="px-3">
-                                            <p className="mb-1 h5">1026</p>
-                                            <p className="small text-muted mb-0">Followers</p>
-                                        </div>
-                                        <div>
-                                            <p className="mb-1 h5">478</p>
-                                            <p className="small text-muted mb-0">Following</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="card-body p-4 text-black">
-                                    <div className="mb-5">
-                                        <p className="lead fw-normal mb-1">About</p>
-                                        <div className="p-4" style={{ backgroundColor: '#f8f9fa' }}>
-                                            <p className="font-italic mb-1">firstName : {userData.firstName}</p>
-                                            <p className="font-italic mb-1">lastName : {userData.lastName}</p>
-                                            <p className="font-italic mb-0">email : {userData.email}</p>
-                                        </div>
-                                    </div>
-                                    <div className="d-flex justify-content-between align-items-center mb-4">
-                                        <p className="lead fw-normal mb-0">Votre historique</p>
-                                        <p className="mb-0"><a href="#!" className="text-muted">Show all</a></p>
-                                    </div>
-                                    <div className="row g-2">
-                                        <div className="col mb-2">
-                                            <img src="https://mdbcdn.b-cdn.net/img/Photos/Lightbox/Original/img%20(112).webp"
-                                                 alt="image 1" className="w-100 rounded-3" />
-                                        </div>
-                                        <div className="col mb-2">
-                                            <img src="https://mdbcdn.b-cdn.net/img/Photos/Lightbox/Original/img%20(107).webp"
-                                                 alt="image 1" className="w-100 rounded-3" />
-                                        </div>
-                                    </div>
-                                    <div className="row g-2">
-                                        <div className="col">
-                                            <img src="https://mdbcdn.b-cdn.net/img/Photos/Lightbox/Original/img%20(108).webp"
-                                                 alt="image 1" className="w-100 rounded-3" />
-                                        </div>
-                                        <div className="col">
-                                            <img src="https://mdbcdn.b-cdn.net/img/Photos/Lightbox/Original/img%20(114).webp"
-                                                 alt="image 1" className="w-100 rounded-3" />
-                                        </div>
-                                    </div>
-                                </div>
-                                <button onClick={logout}>Logout</button> {/* Bouton de déconnexion */}
+        <div className="container py-5">
+            {error && (
+                <div className="alert alert-danger" role="alert">
+                    {error}
+                </div>
+            )}
+            {userData && (
+                <div className="custom-card-container">
+                    <div className="card shadow-lg custom-card">
+                        <div className="card-header profile-header d-flex align-items-center">
+                            <img src={utilisateur} alt="Profile" className="profile-img rounded-circle" />
+                            <div className="profile-info">
+                                <h5>{user.lastName}</h5>
+                                <p>{user.email}</p>
+                            </div>
+                            <div className="retour" onClick={WelcomPage}>
+                                <h4>Page d'accueil</h4>
                             </div>
                         </div>
+                        <div className="card-body">
+                            <h5 className="card-title">Informations utilisateur</h5>
+                            <p className="card-text">Prénom : {user.firstName}</p>
+                            <p className="card-text">Nom : {user.lastName}</p>
+                            <p className="card-text">Email : {user.email}</p>
+                            <hr />
+                            <h5 className="card-title">Votre historique</h5>
+                            {userData.length > 0 ? (
+                                <ul className="list-group">
+                                    {userData.map((facture, index) => (
+                                        <li
+                                            className="list-group-item d-flex justify-content-between align-items-center"
+                                            key={index}
+                                            onClick={() => handleShowModal(facture)}
+                                            style={{ cursor: 'pointer' }}
+                                        >
+                                            Facture : {facture.montantPaye} {facture.devise}
+                                            <span className="badge bg-primary rounded-pill">Voir</span>
+                                        </li>
+                                    ))}
+                                </ul>
+                            ) : (
+                                <p className="text-muted">Aucun enregistrement trouvé</p>
+                            )}
+                            <Button variant="outline-dark" className="mt-4 logout-btn" onClick={logout}>
+                                Déconnexion
+                            </Button>
+                        </div>
                     </div>
-                )}
-            </div>
-        </section>
+                </div>
+            )}
+            <Modal show={showModal} onHide={handleCloseModal}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Détails de la Facture</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    {selectedFacture ? (
+                        <div>
+                            <p><strong>Montant Payé:</strong> {selectedFacture.montantPaye} {selectedFacture.devise}</p>
+                            <p><strong>Prénom:</strong> {selectedFacture.firstName}</p>
+                            <p><strong>Nom:</strong> {selectedFacture.lastName}</p>
+                            <p><strong>Email:</strong> {selectedFacture.email}</p>
+                            <p><strong>Départ allé:</strong> {selectedFacture.aeroportDepart}</p>
+                            <p><strong>Arrivée allé:</strong> {selectedFacture.aeroportArrivee}</p>
+                            <p><strong>Départ retour:</strong> {selectedFacture.dateDepartRetour.split('T')[0]}</p>
+                            <p><strong>Arrivée retour:</strong> {selectedFacture.dateArriveeRetour.split('T')[0]}</p>
+                        </div>
+                    ) : (
+                        <p>Loading...</p>
+                    )}
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleCloseModal}>
+                        Close
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+        </div>
     );
 };
 

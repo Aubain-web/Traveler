@@ -1,10 +1,46 @@
-.gradient-custom-2 {
-    /* fallback for old browsers */
-    background: #fbc2eb;
+/* userDashboard.css */
 
-    /* Chrome 10-25, Safari 5.1-6 */
-    background: -webkit-linear-gradient(to right, rgba(251, 194, 235, 1), rgba(166, 193, 238, 1));
+/* Ajustement des styles de la carte et du conteneur */
+.custom-card-container {
+    width: 100%;
+    max-width: 800px;
+    margin: auto;
+}
 
-    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    background: linear-gradient(to right, rgba(251, 194, 235, 1), rgba(166, 193, 238, 1))
+.custom-card {
+    min-height: 700px;
+}
+
+/* Style pour le header du profil */
+.profile-header {
+    height: 200px;
+    background-color: #343a40;
+}
+
+.profile-img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+}
+
+.profile-info {
+    color: white;
+    margin-left: 20px;
+}
+
+.logout-btn {
+    width: 150px;
+    margin-bottom: 20px;
+}
+
+.retour {
+    margin-left: auto;
+    color: white;
+    cursor: pointer;
+}
+
+.retour:hover {
+    text-decoration: none;
+    color : #0066CC;
+
 }

@@ -2,7 +2,7 @@ const bcrypt = require('bcrypt');
 const User = require('../models/Users');
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
-const jwtSecret = process.env.JWT_SECRET;
+const {jwtSecret} = require('../config');
 FactureBilletAvion = require('../models/facture');
 
 exports.signIn = (req, res, next) =>{
@@ -40,12 +40,11 @@ exports.login = async (req, res, next) => {
         }
 
         const token = jwt.sign({ userId: user._id }, jwtSecret, { expiresIn: '1h' });
-
-        // Stockez le token dans un cookie ou dans le stockage local du navigateur
-        // Pour cet exemple, nous allons stocker le token dans un cookie
+        // Stocker le token dans un cookie ou dans le stockage local du navigateur
+        //  stocker le token dans un cookie
         res.cookie('jwt', token, { httpOnly: true });
 
-        // Renvoyez le token et les informations de l'utilisateur dans la réponse
+        // Renvoyer le token et les informations de l'utilisateur dans la réponse
         res.json({ user, token });
 
     } catch (error) {
@@ -55,6 +54,10 @@ exports.login = async (req, res, next) => {
 };
 
 
+exports.logout = (req, res) => {
+    res.clearCookie('jwt');
+    res.status(200).json({ message: 'Déconnexion réussie' });
+};
 
 
 exports.userFind = async (req, res, next) =>{
@@ -78,3 +81,4 @@ exports.findFacture = async (req, res, next) =>{
         res.status(500).json({ error: error.message });
     }
 }
+
